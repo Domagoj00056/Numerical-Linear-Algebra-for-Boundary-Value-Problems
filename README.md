@@ -1,4 +1,4 @@
-# Numerical-Linear-Algebra
+# Numerical Linear Algebra for Boundary Value Problems
 In this project we will study the performance of finite difference methods to solve the boundary value problem
 
 $$
