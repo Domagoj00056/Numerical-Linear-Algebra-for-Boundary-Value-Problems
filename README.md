@@ -1,57 +1,113 @@
 # Numerical Analysis of Boundary Value Problems
 
-## Overview
+## Mathematical Formulation
 
-This project investigates numerical methods for solving the Airy boundary value problem
+In this project we investigate numerical methods for solving the Airy boundary value problem
 
-\[
-y'' - xy = 0,
-\]
+$$
+\frac{d^2 y}{dx^2} - xy = 0,
+\qquad x \in (0,L),
+$$
 
 subject to Dirichlet boundary conditions
 
-\[
-y(0)=1,\qquad y(L)=0.
-\]
+$$
+y(0)=1,
+\qquad
+y(L)=0.
+$$
 
-The equation is discretized using finite difference methods, transforming the differential equation into a system of linear algebraic equations. Numerical solutions are compared against the analytical solution expressed in terms of Airy functions.
+The differential equation is discretized using finite difference methods, transforming the continuous boundary value problem into a system of linear algebraic equations
 
-The project focuses on convergence behaviour, matrix conditioning, iterative solver performance, and alternative formulations through shooting methods.
+$$
+A\mathbf{y}=\mathbf{b}.
+$$
+
+The resulting numerical solutions are compared with the analytical solution expressed in terms of Airy functions.
 
 ---
 
-## Methods Implemented
+## Numerical Methods
 
 ### Second-Order Finite Difference Method
 
-- Central difference approximation of the second derivative
-- Construction of a tridiagonal system matrix
-- Solution of the resulting linear system
-- Comparison with the exact Airy solution
+The second derivative is approximated by the central difference formula
+
+$$
+y''(x_i)
+\approx
+\frac{y_{i+1}-2y_i+y_{i-1}}{h^2}.
+$$
+
+This leads to a tridiagonal linear system whose solution approximates the continuous problem.
 
 ### Fourth-Order Finite Difference Method
 
-- Higher-order finite difference discretization
-- Improved accuracy through wider stencils
-- Empirical convergence analysis
+A higher-order approximation is obtained using the stencil
 
-### Conditioning and Iterative Methods
+$$
+y''(x_i)
+\approx
+\frac{
+-y_{i-2}
++16y_{i-1}
+-30y_i
++16y_{i+1}
+-y_{i+2}
+}
+{12h^2}.
+$$
 
-- Computation of matrix condition numbers
-- Analysis of how domain size affects conditioning
-- Construction of Gauss–Seidel iteration matrices
-- Spectral radius analysis and convergence behaviour
+The resulting scheme provides improved accuracy and allows investigation of convergence rates.
+
+### Conditioning and Iterative Solvers
+
+The project examines:
+
+- Matrix condition numbers
+- Gauss–Seidel iteration matrices
+- Spectral radii
+- Dependence of convergence on domain size
+
+The Gauss–Seidel iteration can be written as
+
+$$
+\mathbf{x}^{(k+1)}
+=
+B_{GS}\mathbf{x}^{(k)}
++
+\mathbf{c},
+$$
+
+where convergence is determined by
+
+$$
+\rho(B_{GS}) < 1.
+$$
 
 ### Shooting Method
 
-- Reformulation of the boundary value problem as an initial value problem
-- Runge–Kutta integration
-- Secant method for determining the unknown initial slope
-- Comparison with finite difference solutions
+The boundary value problem is reformulated as an initial value problem
+
+$$
+y_1' = y_2,
+$$
+
+$$
+y_2' = xy_1,
+$$
+
+with an unknown initial slope
+
+$$
+y'(0)=\beta.
+$$
+
+A Runge–Kutta solver together with the Secant Method is used to determine the value of $\beta$ satisfying the boundary condition at $x=L$.
 
 ---
 
-## Key Numerical Concepts
+## Key Concepts
 
 - Finite Difference Methods
 - Numerical Linear Algebra
@@ -63,18 +119,6 @@ The project focuses on convergence behaviour, matrix conditioning, iterative sol
 - Runge–Kutta Methods
 - Secant Method
 - Boundary Value Problems
-
----
-
-## Results
-
-The project demonstrates:
-
-- Second-order and fourth-order convergence behaviour
-- Accuracy improvements obtained through higher-order discretizations
-- Dependence of matrix conditioning on domain size
-- The relationship between spectral radius and iterative solver convergence
-- Agreement between finite difference and shooting method solutions
 
 ---
 
