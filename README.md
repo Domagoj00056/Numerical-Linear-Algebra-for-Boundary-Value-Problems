@@ -72,11 +72,7 @@ The project examines:
 The Gauss–Seidel iteration can be written as
 
 $$
-\bf{x}^{(k+1)}
-=
-B_{GS}\mathbf{x}^{(k)}
-+
-\mathbf{c},
+\mathbf{x}^{(k+1)} = B_{GS}\mathbf{x}^{(k)} + \mathbf{c}.
 $$
 
 where convergence is determined by
