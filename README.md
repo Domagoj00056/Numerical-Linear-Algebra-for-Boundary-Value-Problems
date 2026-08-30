@@ -72,7 +72,7 @@ The project examines:
 The Gauss–Seidel iteration can be written as
 
 $$
-\mathbf{x}^{(k+1)}
+\bf{x}^{(k+1)}
 =
 B_{GS}\mathbf{x}^{(k)}
 +
