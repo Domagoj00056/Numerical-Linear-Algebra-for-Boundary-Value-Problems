@@ -35,15 +35,11 @@ boundary value problem. The exact values $Ai(0)$ and $Bi(0)$ are retained
 because the asymptotic expansions are valid only for large positive arguments.
 
 $$
-y_{\mathrm{asym}}(x) =
+y(x) =
 \frac{
-Bi_{\mathrm{asym}}(L) Ai_{\mathrm{asym}}(x)
--
-Ai_{\mathrm{asym}}(L) Bi_{\mathrm{asym}}(x)
+Bi(L)Ai(x) - Ai(L)Bi(x)
 }{
-Bi_{\mathrm{asym}}(L) Ai(0)
--
-Ai_{\mathrm{asym}}(L) Bi(0)
+Bi(L)Ai(0) - Ai(L)Bi(0)
 }.
 $$
 
