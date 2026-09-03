@@ -1,42 +1,29 @@
 # Numerical Analysis of Boundary Value Problems
 The general solution of the Airy equation is
 
-$$
-y(x)=C_1\operatorname{Ai}(x)+C_2\operatorname{Bi}(x).
-$$
 
-Imposing the boundary conditions $y(0)=1$ and $y(L)=0$ gives the
-$2\times2$ linear system
+The general solution of the Airy equation is
 
 $$
-\begin{pmatrix}
-\operatorname{Ai}(0) & \operatorname{Bi}(0)\\
-\operatorname{Ai}(L) & \operatorname{Bi}(L)
-\end{pmatrix}
-\begin{pmatrix}
-C_1\\
-C_2
-\end{pmatrix}
-=
-\begin{pmatrix}
-1\\
-0
-\end{pmatrix}.
+y(x) = C_1 Ai(x) + C_2 Bi(x).
+$$
+
+Imposing the boundary conditions $y(0)=1$ and $y(L)=0$ gives
+
+$$
+C_1 Ai(0) + C_2 Bi(0) = 1,
+$$
+
+$$
+C_1 Ai(L) + C_2 Bi(L) = 0.
 $$
 
 Solving this system for $C_1$ and $C_2$ gives the exact solution
 
 $$
-\boxed{
-y(x)=
-\frac{
-\operatorname{Bi}(L)\operatorname{Ai}(x)
--\operatorname{Ai}(L)\operatorname{Bi}(x)
-}{
-\operatorname{Bi}(L)\operatorname{Ai}(0)
--\operatorname{Ai}(L)\operatorname{Bi}(0)
-}.
-}
+y(x) =
+\frac{Bi(L)Ai(x) - Ai(L)Bi(x)}
+{Bi(L)Ai(0) - Ai(L)Bi(0)}.
 $$
 
 This provides the analytical reference solution against which the
