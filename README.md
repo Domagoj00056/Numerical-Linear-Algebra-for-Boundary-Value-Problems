@@ -1,13 +1,32 @@
 # Numerical Analysis of Boundary Value Problems
-
 The general solution of the Airy equation is
-\[
+
+$$
 y(x)=C_1\operatorname{Ai}(x)+C_2\operatorname{Bi}(x).
-\]
-Imposing the boundary conditions $y(0)=1$ and $y(L)=0$ gives a
-$2\times2$ linear system for $C_1$ and $C_2$. Solving this system yields
-the exact solution
-\[
+$$
+
+Imposing the boundary conditions $y(0)=1$ and $y(L)=0$ gives the
+$2\times2$ linear system
+
+$$
+\begin{pmatrix}
+\operatorname{Ai}(0) & \operatorname{Bi}(0)\\
+\operatorname{Ai}(L) & \operatorname{Bi}(L)
+\end{pmatrix}
+\begin{pmatrix}
+C_1\\
+C_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+1\\
+0
+\end{pmatrix}.
+$$
+
+Solving this system for $C_1$ and $C_2$ gives the exact solution
+
+$$
 \boxed{
 y(x)=
 \frac{
@@ -18,10 +37,10 @@ y(x)=
 -\operatorname{Ai}(L)\operatorname{Bi}(0)
 }.
 }
-\]
+$$
+
 This provides the analytical reference solution against which the
-finite-difference, shooting, and asymptotic approximations can be
-compared.
+finite-difference, shooting, and asymptotic approximations are compared.
 
 
 ## Mathematical Formulation
