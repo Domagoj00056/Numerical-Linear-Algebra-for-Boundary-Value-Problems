@@ -30,6 +30,43 @@ This provides the analytical reference solution against which the
 finite-difference, shooting, and asymptotic approximations are compared.
 
 
+We now use the leading-order asymptotic approximations for both
+$Ai$ and $Bi$ to construct an asymptotic approximation of the full
+boundary value problem. The exact values $Ai(0)$ and $Bi(0)$ are retained
+because the asymptotic expansions are valid only for large positive
+arguments.
+
+$$
+y_{\mathrm{asym}}(x)=
+\frac{
+Bi_{\mathrm{asym}}(L)Ai_{\mathrm{asym}}(x)
+-
+Ai_{\mathrm{asym}}(L)Bi_{\mathrm{asym}}(x)
+}{
+Bi_{\mathrm{asym}}(L)Ai(0)
+-
+Ai_{\mathrm{asym}}(L)Bi(0)
+}.
+$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Mathematical Formulation
 
 In this project we investigate numerical methods for solving the Airy boundary value problem
