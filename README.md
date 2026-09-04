@@ -17,48 +17,66 @@ The project has two main components:
 
 ## 1. Asymptotic Analysis
 
-The Airy equation has two linearly independent solutions, commonly denoted by Ai(x) and Bi(x).
+The Airy equation has two linearly independent solutions, commonly denoted by $\operatorname{Ai}(x)$ and $\operatorname{Bi}(x)$.
 
-For large positive x, their leading-order asymptotic behaviour is
+For large positive $x$, their leading-order asymptotic behaviour is
 
 $$
-Ai(x) \sim
-\frac{1}{2\sqrt{\pi}}x^{-1/4}
+\operatorname{Ai}(x)
+\sim
+\frac{1}{2\sqrt{\pi}}
+x^{-1/4}
 \exp\left(-\frac{2}{3}x^{3/2}\right),
 $$
 
 and
 
 $$
-Bi(x) \sim
-\frac{1}{\sqrt{\pi}}x^{-1/4}
+\operatorname{Bi}(x)
+\sim
+\frac{1}{\sqrt{\pi}}
+x^{-1/4}
 \exp\left(\frac{2}{3}x^{3/2}\right).
 $$
 
 The asymptotic behaviour is derived using the **method of steepest descent**, starting from the contour integral representation
 
 $$
-Ai(\lambda)
+\operatorname{Ai}(\lambda)
 =
 \frac{1}{2\pi i}
-\int_\gamma
-\exp\left(\lambda t-\frac{t^3}{3}\right)\,dt.
+\int_{\gamma}
+\exp\left(
+\lambda t-\frac{t^3}{3}
+\right)
+\,dt.
 $$
 
-After rescaling,
+After the rescaling
 
 $$
-Ai(\lambda)
+t=\lambda^{1/2}s,
+$$
+
+and renaming $s$ as $t$, this becomes
+
+$$
+\operatorname{Ai}(\lambda)
 =
 \frac{\lambda^{1/2}}{2\pi i}
-\int_\gamma
-\exp\left(\lambda^{3/2}h(t)\right)\,dt,
+\int_{\gamma}
+\exp\left(
+\lambda^{3/2}h(t)
+\right)
+\,dt,
 $$
 
 where
 
 $$
-h(t)=t-\frac{t^3}{3}.
+h(t)
+=
+t-\frac{t^3}{3}.
 $$
 
 The saddle points satisfy
@@ -73,7 +91,7 @@ $$
 t=\pm1.
 $$
 
-The steepest descent contours are obtained from the condition that the imaginary part of $h(t)$ remains constant.
+The steepest descent contours are obtained by requiring the imaginary part of $h(t)$ to remain constant.
 
 ---
 
@@ -81,20 +99,23 @@ The steepest descent contours are obtained from the condition that the imaginary
 
 Expanding the contour locally around the relevant saddle point gives a higher-order approximation.
 
-The resulting expansion for Ai(x) is
+The resulting expansion for $\operatorname{Ai}(x)$ is
 
 $$
-Ai(x)
+\operatorname{Ai}(x)
 \sim
-\frac{1}{2\sqrt{\pi}}x^{-1/4}
-\exp\left(-\frac{2}{3}x^{3/2}\right)
+\frac{1}{2\sqrt{\pi}}
+x^{-1/4}
+\exp\left(
+-\frac{2}{3}x^{3/2}
+\right)
 \left(
 1-\frac{5}{48x^{3/2}}
 +O(x^{-3})
 \right).
 $$
 
-The numerical results show that including the higher-order correction substantially improves the approximation for moderate values of x.
+The numerical results show that including the higher-order correction improves the approximation for moderate values of $x$.
 
 ---
 
@@ -117,23 +138,32 @@ $$
 The general solution is
 
 $$
-y(x)=C_1 Ai(x)+C_2 Bi(x).
+y(x)
+=
+C_1\operatorname{Ai}(x)
++
+C_2\operatorname{Bi}(x).
 $$
 
 Using the boundary conditions gives the exact solution
 
 $$
-y(x)=
+y(x)
+=
 \frac{
-Bi(L)Ai(x)-Ai(L)Bi(x)
+\operatorname{Bi}(L)\operatorname{Ai}(x)
+-
+\operatorname{Ai}(L)\operatorname{Bi}(x)
 }{
-Bi(L)Ai(0)-Ai(L)Bi(0)
+\operatorname{Bi}(L)\operatorname{Ai}(0)
+-
+\operatorname{Ai}(L)\operatorname{Bi}(0)
 }.
 $$
 
 This exact solution is used as a reference for evaluating the numerical methods.
 
-The asymptotic approximations are used for large values of $x$ and $L$, while the exact values at $x=0$ are retained because the large-argument asymptotic expansions are not valid there.
+The asymptotic approximations are used for large values of $x$ and $L$. The exact values at $x=0$ are retained because the large-argument asymptotic expansions are not valid there.
 
 ---
 
@@ -157,13 +187,16 @@ y_{i-1}
 \left(2+h^2x_i\right)y_i
 +
 y_{i+1}
-=0.
+=
+0.
 $$
 
 This produces a linear system
 
 $$
-A^{(2)}y=b,
+A^{(2)}\mathbf{y}
+=
+\mathbf{b},
 $$
 
 where
@@ -183,7 +216,9 @@ $$
 After applying the boundary conditions,
 
 $$
-b=(-1,0,\ldots,0)^T.
+\mathbf{b}
+=
+(-1,0,\ldots,0)^T.
 $$
 
 ---
@@ -220,25 +255,29 @@ y''(x_i)
 }{12h^2}.
 $$
 
-This leads to a linear system
+The resulting system is
 
 $$
-A^{(4)}y=b.
+A^{(4)}\mathbf{y}
+=
+\mathbf{b}.
 $$
 
 After incorporating the boundary conditions,
 
 $$
-b=(-11,0,\ldots,0)^T.
+\mathbf{b}
+=
+(-11,0,\ldots,0)^T.
 $$
 
-The diagonal entries in the interior contain the contribution
+For the interior rows, the diagonal entries contain the contribution
 
 $$
--30-12h^2x_i,
+-30-12h^2x_i.
 $$
 
-while the first and last rows use the asymmetric boundary stencils.
+The first and last rows use the asymmetric fourth-order boundary stencils.
 
 ---
 
@@ -249,31 +288,41 @@ The resulting linear systems are solved using the **Gauss--Seidel iterative meth
 For a system
 
 $$
-Ay=b,
+A\mathbf{y}=\mathbf{b},
 $$
 
-the Gauss--Seidel iteration can be written as
+write
 
 $$
-y^{(k+1)}
+A=D-L-U.
+$$
+
+The Gauss--Seidel iteration is then
+
+$$
+\mathbf{y}^{(k+1)}
 =
-(D-L)^{-1}Uy^{(k)}
+(D-L)^{-1}
+U\mathbf{y}^{(k)}
 +
-(D-L)^{-1}b,
+(D-L)^{-1}\mathbf{b}.
 $$
 
-where $A=D-L-U$.
-
-The iteration matrix is therefore
+The corresponding iteration matrix is
 
 $$
-G=(D-L)^{-1}U.
+G
+=
+(D-L)^{-1}U.
 $$
 
 Convergence is determined by the spectral radius
 
 $$
-\rho(G).
+\rho(G)
+=
+\max_i
+\left|\lambda_i(G)\right|.
 $$
 
 Gauss--Seidel converges when
@@ -288,7 +337,7 @@ $$
 
 The numerical error is measured by comparing the finite difference solution with the exact Airy solution.
 
-For a grid spacing $h$, the error behaves approximately as
+For grid spacing $h$, the error behaves approximately as
 
 $$
 E(h)\propto h^p,
@@ -299,7 +348,7 @@ where $p$ is the observed convergence order.
 A log-log fit gives the following convergence rates:
 
 | Method | Observed order |
-|---|---:|
+| --- | ---: |
 | Second-order finite difference | 2.02 |
 | Fourth-order finite difference | 4.04 |
 
@@ -316,10 +365,13 @@ The condition number of the finite difference matrices is investigated as the in
 The condition number is defined by
 
 $$
-\kappa(A)=\|A\|\|A^{-1}\|.
+\kappa(A)
+=
+\lVert A\rVert
+\lVert A^{-1}\rVert.
 $$
 
-The results show that the conditioning depends on the interval length and differs between the second- and fourth-order discretisations.
+The numerical results show how the conditioning of the discretised systems varies with $L$.
 
 ![Condition number](condition_number.png)
 
@@ -327,15 +379,16 @@ The results show that the conditioning depends on the interval length and differ
 
 ## 9. Gauss--Seidel Spectral Radius
 
-The spectral radius of the Gauss--Seidel iteration matrix is also examined as a function of $L$.
+The spectral radius of the Gauss--Seidel iteration matrix is examined as a function of $L$.
 
 $$
 \rho(G)
 =
-\max_i |\lambda_i(G)|.
+\max_i
+\left|\lambda_i(G)\right|.
 $$
 
-The numerical results show that the spectral radius decreases over the tested range of $L$, indicating faster Gauss--Seidel convergence for larger values of $L$ in this experiment.
+For the tested range of $L$, the spectral radius decreases as $L$ increases, indicating faster Gauss--Seidel convergence in this numerical experiment.
 
 ![Spectral radius](spectral_radius.png)
 
@@ -345,7 +398,7 @@ The numerical results show that the spectral radius decreases over the tested ra
 
 The exact, numerical, and asymptotic solutions are compared for several values of $L$.
 
-The finite difference solution converges towards the exact solution as the grid is refined, while the asymptotic solution becomes increasingly accurate as the argument becomes large.
+The finite difference solution converges towards the exact solution as the grid is refined, while the asymptotic approximation becomes increasingly accurate for large arguments.
 
 ![Exact and asymptotic solutions](airy_exact_vs_asymptotic.png)
 
@@ -360,14 +413,14 @@ The finite difference solution converges towards the exact solution as the grid 
 - Used asymmetric fourth-order boundary stencils to maintain fourth-order accuracy.
 - Solved the resulting linear systems using Gauss--Seidel iteration.
 - Observed convergence rates of approximately **2.02** and **4.04**.
-- Investigated matrix conditioning and Gauss--Seidel spectral radius.
+- Investigated matrix conditioning and the Gauss--Seidel spectral radius.
 - Compared exact, numerical, and asymptotic solutions.
 
 ---
 
 ## Methods and Tools
 
-**Mathematics**
+### Mathematics
 
 - Ordinary differential equations
 - Asymptotic analysis
@@ -378,7 +431,7 @@ The finite difference solution converges towards the exact solution as the grid 
 - Matrix conditioning
 - Spectral analysis
 
-**Computing**
+### Computing
 
 - Python
 - NumPy
