@@ -133,87 +133,13 @@ where
 
 
 $$
-A^{(2)}=\left(\begin{matrix}
+A^{(2)}=\begin{matrix}
 -2-h^2x_1 & 1 & 0 & \cdots & 0\\
 1 & -2-h^2x_2 & 1 & \ddots & \vdots\\
 0 & 1 & -2-h^2x_3 & \ddots & 0\\
 \vdots & \ddots & \ddots & \ddots & 1\\
 0 & \cdots & 0 & 1 & -2-h^2x_N
-\end{matrix}\right).
-$$
-
-
-
-### 1. `matrix` + `\left(\right)`
-
-$$
-A^{(2)}=\left(
-\begin{matrix}
--2-h^2x_1 & 1 & 0 & \cdots & 0\\
-1 & -2-h^2x_2 & 1 & \ddots & \vdots\\
-0 & 1 & -2-h^2x_3 & \ddots & 0\\
-\vdots & \ddots & \ddots & \ddots & 1\\
-0 & \cdots & 0 & 1 & -2-h^2x_N
-\end{matrix}
-\right)
-$$
-
-### 2. `matrix` + `\biggl(\biggr)`
-
-$$
-A^{(2)}=
-\biggl(
-\begin{matrix}
--2-h^2x_1 & 1 & 0 & \cdots & 0\\
-1 & -2-h^2x_2 & 1 & \ddots & \vdots\\
-0 & 1 & -2-h^2x_3 & \ddots & 0\\
-\vdots & \ddots & \ddots & \ddots & 1\\
-0 & \cdots & 0 & 1 & -2-h^2x_N
-\end{matrix}
-\biggr)
-$$
-
-### 3. `pmatrix`
-
-$$
-A^{(2)}=
-\begin{pmatrix}
--2-h^2x_1 & 1 & 0 & \cdots & 0\\
-1 & -2-h^2x_2 & 1 & \ddots & \vdots\\
-0 & 1 & -2-h^2x_3 & \ddots & 0\\
-\vdots & \ddots & \ddots & \ddots & 1\\
-0 & \cdots & 0 & 1 & -2-h^2x_N
-\end{pmatrix}
-$$
-
-### 4. `matrix` + `\Biggl(\Biggr)`
-
-$$
-A^{(2)}=
-\Biggl(
-\begin{matrix}
--2-h^2x_1 & 1 & 0 & \cdots & 0\\
-1 & -2-h^2x_2 & 1 & \ddots & \vdots\\
-0 & 1 & -2-h^2x_3 & \ddots & 0\\
-\vdots & \ddots & \ddots & \ddots & 1\\
-0 & \cdots & 0 & 1 & -2-h^2x_N
-\end{matrix}
-\Biggr)
-$$
-
-### 5. `array` + `\left(\right)`
-
-$$
-A^{(2)}=
-\left(
-\begin{array}{ccccc}
--2-h^2x_1 & 1 & 0 & \cdots & 0\\
-1 & -2-h^2x_2 & 1 & \ddots & \vdots\\
-0 & 1 & -2-h^2x_3 & \ddots & 0\\
-\vdots & \ddots & \ddots & \ddots & 1\\
-0 & \cdots & 0 & 1 & -2-h^2x_N
-\end{array}
-\right)
+\end{matrix}.
 $$
 
 After applying the boundary conditions,
