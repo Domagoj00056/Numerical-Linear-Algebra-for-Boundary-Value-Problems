@@ -217,69 +217,17 @@ The resulting linear system is solved using the **Gauss--Seidel iterative method
 
 ---
 
-## 6. Numerical Solution
+## 6. Convergence of the Finite Difference Schemes
 
-
-
-For a system
-
-$$
-Ay=b,
-$$
-
-write
-
-$$
-A=D-L-U.
-$$
-
-The Gauss--Seidel iteration is
-
-$$
-y^{(k+1)}
-=
-(D-L)^{-1}
-Uy^{(k)}
-+
-(D-L)^{-1}b.
-$$
-
-The corresponding iteration matrix is
-
-$$
-G=(D-L)^{-1}U.
-$$
-
-Convergence is determined by the spectral radius
-
-$$
-\rho(G)
-=
-\max_i
-|\lambda_i(G)|.
-$$
-
-Gauss--Seidel converges when
-
-$$
-\rho(G)<1.
-$$
-
----
-
-## 7. Convergence of the Finite Difference Schemes
-
-The numerical error is measured by comparing the finite difference solution with the exact Airy solution.
-
-For grid spacing $h$, the error behaves approximately as
+To verify the convergence order, we measured the numerical error for a range of grid spacings $h$. The error was plotted against $h$ on a log-log scale. Since
 
 $$
 E(h)\propto h^p,
 $$
 
-where $p$ is the observed convergence order.
+the slope of the resulting line gives the observed convergence order $p$.
 
-A log-log fit gives the following convergence rates:
+The measured slopes are:
 
 | Method | Observed order |
 | --- | ---: |
@@ -288,53 +236,13 @@ A log-log fit gives the following convergence rates:
 
 These results agree closely with the theoretical orders of the two schemes.
 
-![Finite difference convergence](finite_difference_convergence.png)
 
----
-
-## 8. Conditioning
-
-The condition number of the finite difference matrices is investigated as the interval length $L$ varies.
-
-The condition number is defined by
-
-$$
-\kappa(A)
-=
-\|A\|
-\|A^{-1}\|.
-$$
-
-The numerical results show how the conditioning of the discretised systems varies with $L$.
-
-![Condition number](condition_number.png)
-
----
-
-## 9. Gauss--Seidel Spectral Radius
-
-The spectral radius of the Gauss--Seidel iteration matrix is examined as a function of $L$.
-
-$$
-\rho(G)
-=
-\max_i
-|\lambda_i(G)|.
-$$
-
-For the tested range of $L$, the spectral radius decreases as $L$ increases, indicating faster Gauss--Seidel convergence in this numerical experiment.
-
-![Spectral radius](spectral_radius.png)
-
----
-
-## 10. Comparison of Numerical and Asymptotic Solutions
+## 7. Comparison of Numerical and Asymptotic Solutions
 
 The exact, numerical, and asymptotic solutions are compared for several values of $L$.
 
 The finite difference solution converges towards the exact solution as the grid is refined, while the asymptotic approximation becomes increasingly accurate for large arguments.
 
-![Exact and asymptotic solutions](airy_exact_vs_asymptotic.png)
 
 ---
 
@@ -371,14 +279,3 @@ The finite difference solution converges towards the exact solution as the grid 
 - NumPy
 - SciPy
 - Matplotlib
-
----
-
-## Repository Structure
-
-```text
-.
-├── code/
-├── plots/
-├── report.pdf
-└── README.md
