@@ -1,60 +1,67 @@
 # Asymptotic Analysis and Numerical Methods for the Airy Equation
 
-## 📖 Overview
-
-This project investigates the **Airy equation**
+This project studies the Airy differential equation
 
 $$
-y''-xy=0,
+y'' - xy = 0,
 $$
 
-combining asymptotic analysis with numerical methods for boundary value problems.
+combining asymptotic analysis, numerical methods, and iterative linear solvers.
 
-The project has two main objectives:
+The project has two main components:
 
-1. Derive the large-$x$ asymptotic behaviour of the Airy functions using the **method of steepest descent**.
-2. Numerically solve the resulting boundary value problem using **second- and fourth-order finite difference methods**, and analyse the convergence and conditioning of the resulting linear systems.
-
-The project therefore connects asymptotic analysis, numerical differentiation, iterative linear solvers, and numerical error analysis.
+1. Derivation and numerical verification of asymptotic approximations for the Airy functions.
+2. Numerical solution of a boundary value problem using second- and fourth-order finite difference methods.
 
 ---
 
-## 🔬 Asymptotic Analysis
+## 1. Asymptotic Analysis
 
-The Airy equation has two linearly independent solutions,
+The Airy equation has two linearly independent solutions, commonly denoted by Ai(x) and Bi(x).
 
-$$
-\operatorname{Ai}(x), \qquad \operatorname{Bi}(x),
-$$
-
-which exhibit fundamentally different behaviour for large positive $x$:
-
-- $\operatorname{Ai}(x)$ decays exponentially;
-- $\operatorname{Bi}(x)$ grows exponentially.
-
-Starting from the contour representation
+For large positive x, their leading-order asymptotic behaviour is
 
 $$
-\operatorname{Ai}(\lambda)
+Ai(x) \sim
+\frac{1}{2\sqrt{\pi}}x^{-1/4}
+\exp\left(-\frac{2}{3}x^{3/2}\right),
+$$
+
+and
+
+$$
+Bi(x) \sim
+\frac{1}{\sqrt{\pi}}x^{-1/4}
+\exp\left(\frac{2}{3}x^{3/2}\right).
+$$
+
+The asymptotic behaviour is derived using the **method of steepest descent**, starting from the contour integral representation
+
+$$
+Ai(\lambda)
 =
 \frac{1}{2\pi i}
 \int_\gamma
-e^{\lambda t-t^3/3}\,dt,
+\exp\left(\lambda t-\frac{t^3}{3}\right)\,dt.
 $$
 
-the integral is rescaled to expose the large parameter,
+After rescaling,
 
 $$
-\operatorname{Ai}(\lambda)
+Ai(\lambda)
 =
 \frac{\lambda^{1/2}}{2\pi i}
 \int_\gamma
-e^{\lambda^{3/2}h(t)}\,dt,
-\qquad
+\exp\left(\lambda^{3/2}h(t)\right)\,dt,
+$$
+
+where
+
+$$
 h(t)=t-\frac{t^3}{3}.
 $$
 
-The saddle points are determined from
+The saddle points satisfy
 
 $$
 h'(t)=1-t^2=0,
@@ -66,123 +73,97 @@ $$
 t=\pm1.
 $$
 
-Analysis of the steepest-descent contours leads to the leading-order approximation
-
-$$
-\boxed{
-\operatorname{Ai}(\lambda)
-\sim
-\frac{1}{2\sqrt{\pi}}
-\lambda^{-1/4}
-e^{-2\lambda^{3/2}/3}
-},
-\qquad
-\lambda\to+\infty.
-$$
-
-Similarly,
-
-$$
-\boxed{
-\operatorname{Bi}(\lambda)
-\sim
-\frac{1}{\sqrt{\pi}}
-\lambda^{-1/4}
-e^{2\lambda^{3/2}/3}
-}.
-$$
-
-### Higher-order asymptotics
-
-The steepest-descent parametrisation is expanded around the saddle point to obtain the next correction:
-
-$$
-t=-1+i\tau-\frac{1}{6}\tau^2
--\frac{5i}{72}\tau^3+O(\tau^4).
-$$
-
-This gives the improved approximation
-
-$$
-\boxed{
-\operatorname{Ai}(\lambda)
-\sim
-\frac{e^{-2\lambda^{3/2}/3}}
-{2\sqrt{\pi}\lambda^{1/4}}
-\left(
-1-\frac{5}{48\lambda^{3/2}}
-+O(\lambda^{-3})
-\right)
-}.
-$$
-
-The numerical comparison shows that including the correction term substantially reduces the relative error.
+The steepest descent contours are obtained from the condition that the imaginary part of $h(t)$ remains constant.
 
 ---
 
-## 🧮 Boundary Value Problem
+## 2. Higher-Order Asymptotics
+
+Expanding the contour locally around the relevant saddle point gives a higher-order approximation.
+
+The resulting expansion for Ai(x) is
+
+$$
+Ai(x)
+\sim
+\frac{1}{2\sqrt{\pi}}x^{-1/4}
+\exp\left(-\frac{2}{3}x^{3/2}\right)
+\left(
+1-\frac{5}{48x^{3/2}}
++O(x^{-3})
+\right).
+$$
+
+The numerical results show that including the higher-order correction substantially improves the approximation for moderate values of x.
+
+---
+
+## 3. Boundary Value Problem
 
 The numerical problem considered is
 
 $$
 y''-xy=0,
-\qquad
+$$
+
+subject to
+
+$$
 y(0)=1,
 \qquad
 y(L)=0.
 $$
 
-Since the general solution is
+The general solution is
 
 $$
-y(x)=C_1\operatorname{Ai}(x)+C_2\operatorname{Bi}(x),
+y(x)=C_1 Ai(x)+C_2 Bi(x).
 $$
 
-the exact solution satisfying the boundary conditions is
+Using the boundary conditions gives the exact solution
 
 $$
-\boxed{
 y(x)=
 \frac{
-\operatorname{Bi}(L)\operatorname{Ai}(x)
--
-\operatorname{Ai}(L)\operatorname{Bi}(x)
+Bi(L)Ai(x)-Ai(L)Bi(x)
 }{
-\operatorname{Bi}(L)\operatorname{Ai}(0)
--
-\operatorname{Ai}(L)\operatorname{Bi}(0)
-}
+Bi(L)Ai(0)-Ai(L)Bi(0)
 }.
 $$
 
-This provides a reference solution against which the numerical and asymptotic approximations can be tested.
+This exact solution is used as a reference for evaluating the numerical methods.
 
-For the asymptotic approximation, the large-$x$ approximations for $\operatorname{Ai}$ and $\operatorname{Bi}$ are used while retaining the exact values $\operatorname{Ai}(0)$ and $\operatorname{Bi}(0)$, since the asymptotic expansions are not valid at $x=0$.
+The asymptotic approximations are used for large values of $x$ and $L$, while the exact values at $x=0$ are retained because the large-argument asymptotic expansions are not valid there.
 
 ---
 
-## 📐 Finite Difference Methods
+## 4. Second-Order Finite Difference Method
 
-### Second-Order Scheme
-
-For interior grid points, the centred approximation
+The second derivative is approximated using the centred second-order stencil
 
 $$
 y''(x_i)
 \approx
-\frac{y_{i-1}-2y_i+y_{i+1}}{h^2}
+\frac{
+y_{i-1}-2y_i+y_{i+1}
+}{h^2}.
 $$
 
-gives
+Substituting this into the Airy equation gives
 
 $$
-y_{i-1}-2y_i+y_{i+1}-h^2x_i y_i=0.
+y_{i-1}
+-
+\left(2+h^2x_i\right)y_i
++
+y_{i+1}
+=0.
 $$
 
-This produces the tridiagonal system
+This produces a linear system
 
 $$
-A^{(2)}\mathbf y=\mathbf b,
+A^{(2)}y=b,
 $$
 
 where
@@ -196,240 +177,221 @@ A^{(2)}
 0 & 1 & -2-h^2x_3 & \ddots & 0\\
 \vdots & \ddots & \ddots & \ddots & 1\\
 0 & \cdots & 0 & 1 & -2-h^2x_N
-\end{pmatrix},
+\end{pmatrix}.
 $$
 
-with
+After applying the boundary conditions,
 
 $$
-\mathbf b=(-1,0,\ldots,0)^T.
+b=(-1,0,\ldots,0)^T.
 $$
-
-The first component of $\mathbf b$ arises from incorporating the boundary condition $y_0=1$.
 
 ---
 
-### Fourth-Order Scheme
+## 5. Fourth-Order Finite Difference Method
 
-A centred five-point stencil is used in the interior:
-
-$$
-y''(x_i)
-\approx
-\frac{
--y_{i-2}+16y_{i-1}-30y_i+16y_{i+1}-y_{i+2}
-}{12h^2}.
-$$
-
-At the first and last interior points, asymmetric fourth-order stencils are used because points outside the computational domain are unavailable.
-
-At the first interior point,
+A fourth-order approximation to the second derivative is
 
 $$
 y''(x_i)
 \approx
 \frac{
-11y_{i-1}-20y_i+6y_{i+1}
-+4y_{i+2}-y_{i+3}
+-y_{i-2}
++16y_{i-1}
+-30y_i
++16y_{i+1}
+-y_{i+2}
 }{12h^2}.
 $$
 
-The resulting system has the form
+Near the boundaries, asymmetric fourth-order stencils are used to avoid introducing points outside the computational domain.
+
+For the first interior point,
 
 $$
-A^{(4)}\mathbf y=\mathbf b,
+y''(x_i)
+\approx
+\frac{
+11y_{i-1}
+-20y_i
++6y_{i+1}
++4y_{i+2}
+-y_{i+3}
+}{12h^2}.
 $$
 
-with interior matrix structure
+This leads to a linear system
 
 $$
-A^{(4)}
-=
-\begin{pmatrix}
--20-12h^2x_1 & 6 & 4 & -1 & \cdots\\
-16 & -30-12h^2x_2 & 16 & -1 & \ddots\\
--1 & 16 & -30-12h^2x_3 & 16 & \ddots\\
-\vdots & \ddots & \ddots & \ddots & \ddots\\
-\cdots & -1 & 4 & 6 & -20-12h^2x_N
-\end{pmatrix}.
+A^{(4)}y=b.
 $$
 
 After incorporating the boundary conditions,
 
 $$
-\boxed{
-\mathbf b=(-11,0,\ldots,0)^T
-}.
+b=(-11,0,\ldots,0)^T.
 $$
 
-The factor $11$ comes from the $11y_0$ term in the asymmetric stencil.
+The diagonal entries in the interior contain the contribution
+
+$$
+-30-12h^2x_i,
+$$
+
+while the first and last rows use the asymmetric boundary stencils.
 
 ---
 
-## 📊 Numerical Validation
-
-The numerical solution was compared with both the exact BVP solution and the asymptotic approximation for
-
-$$
-L=20,\quad 50,\quad 100.
-$$
-
-As $L$ increases while the number of grid points is kept fixed, the grid spacing increases and the finite-difference discretisation error becomes more significant.
-
-In contrast, the asymptotic approximation becomes increasingly accurate as the solution enters the large-$x$ regime.
-
-For $L=100$, the asymptotic approximation is more accurate than the finite-difference solution over the region considered.
-
-### Pointwise Relative Error
-
-The pointwise relative error was evaluated as
-
-$$
-e_{\mathrm{rel}}(x)
-=
-\left|
-\frac{y_{\mathrm{approx}}(x)-y_{\mathrm{exact}}(x)}
-{y_{\mathrm{exact}}(x)}
-\right|.
-$$
-
-The relative error of the Airy asymptotic approximation decreases as $x$ increases, demonstrating the expected improvement deeper into the asymptotic regime.
-
----
-
-## 📈 Convergence of the Finite Difference Schemes
-
-The numerical convergence of the two finite-difference methods was investigated by reducing the grid spacing $h$.
-
-The measured convergence rates were
-
-$$
-\boxed{
-p_{\mathrm{second}}=2.0219
-}
-$$
-
-and
-
-$$
-\boxed{
-p_{\mathrm{fourth}}=4.0362
-}.
-$$
-
-These agree closely with the theoretical orders of $2$ and $4$.
-
-![Finite Difference Convergence](finite_difference_convergence.png)
-
-The fourth-order scheme produces substantially smaller discretisation errors for the same grid spacing.
-
----
-
-## 🔄 Gauss--Seidel Iteration
+## 6. Numerical Solution
 
 The resulting linear systems are solved using the **Gauss--Seidel iterative method**.
 
-Writing
+For a system
 
 $$
-A=D+L+U,
+Ay=b,
 $$
 
 the Gauss--Seidel iteration can be written as
 
 $$
-\mathbf y^{(k+1)}
+y^{(k+1)}
 =
--(D+L)^{-1}U\mathbf y^{(k)}
+(D-L)^{-1}Uy^{(k)}
 +
-(D+L)^{-1}\mathbf b.
+(D-L)^{-1}b,
 $$
 
-The corresponding iteration matrix is
+where $A=D-L-U$.
+
+The iteration matrix is therefore
 
 $$
-G_{\mathrm{GS}}
-=
--(D+L)^{-1}U.
+G=(D-L)^{-1}U.
 $$
 
 Convergence is determined by the spectral radius
 
 $$
-\rho(G_{\mathrm{GS}})
+\rho(G).
+$$
+
+Gauss--Seidel converges when
+
+$$
+\rho(G)<1.
+$$
+
+---
+
+## 7. Convergence of the Finite Difference Schemes
+
+The numerical error is measured by comparing the finite difference solution with the exact Airy solution.
+
+For a grid spacing $h$, the error behaves approximately as
+
+$$
+E(h)\propto h^p,
+$$
+
+where $p$ is the observed convergence order.
+
+A log-log fit gives the following convergence rates:
+
+| Method | Observed order |
+|---|---:|
+| Second-order finite difference | 2.02 |
+| Fourth-order finite difference | 4.04 |
+
+These results agree closely with the theoretical orders of the two schemes.
+
+![Finite difference convergence](finite_difference_convergence.png)
+
+---
+
+## 8. Conditioning
+
+The condition number of the finite difference matrices is investigated as the interval length $L$ varies.
+
+The condition number is defined by
+
+$$
+\kappa(A)=\|A\|\|A^{-1}\|.
+$$
+
+The results show that the conditioning depends on the interval length and differs between the second- and fourth-order discretisations.
+
+![Condition number](condition_number.png)
+
+---
+
+## 9. Gauss--Seidel Spectral Radius
+
+The spectral radius of the Gauss--Seidel iteration matrix is also examined as a function of $L$.
+
+$$
+\rho(G)
 =
-\max_i|\lambda_i(G_{\mathrm{GS}})|.
+\max_i |\lambda_i(G)|.
 $$
 
-The numerical results show that the spectral radius decreases as $L$ increases, indicating faster Gauss--Seidel convergence for larger interval lengths in the range investigated.
+The numerical results show that the spectral radius decreases over the tested range of $L$, indicating faster Gauss--Seidel convergence for larger values of $L$ in this experiment.
+
+![Spectral radius](spectral_radius.png)
 
 ---
 
-## ⚙️ Conditioning
+## 10. Comparison of Numerical and Asymptotic Solutions
 
-The condition number
+The exact, numerical, and asymptotic solutions are compared for several values of $L$.
 
-$$
-\kappa(A)
-$$
+The finite difference solution converges towards the exact solution as the grid is refined, while the asymptotic solution becomes increasingly accurate as the argument becomes large.
 
-was also evaluated for both discretisation matrices.
-
-A large condition number indicates increased sensitivity of the linear system to perturbations and numerical errors.
-
-The numerical results show that the condition number initially decreases rapidly with $L$, before increasing gradually for larger interval lengths. This indicates improved conditioning over an intermediate range followed by increasing numerical sensitivity for large $L$.
-
-![Condition Number](condition_number.png)
-
-![Gauss-Seidel Spectral Radius](spectral_radius.png)
+![Exact and asymptotic solutions](airy_exact_vs_asymptotic.png)
 
 ---
 
-## 🔍 Key Findings
+## Key Results
 
-- Derived the large-$x$ asymptotics of $\operatorname{Ai}(x)$ and $\operatorname{Bi}(x)$ using the **method of steepest descent**.
-- Derived a higher-order correction to the Airy asymptotic expansion.
-- Obtained an exact analytical solution for the Airy boundary value problem.
-- Implemented **second- and fourth-order finite difference schemes**.
-- Verified numerical convergence rates of approximately $2$ and $4$.
-- Compared numerical, exact, and asymptotic solutions across increasing values of $L$.
-- Solved the resulting linear systems using **Gauss--Seidel iteration**.
-- Investigated the **spectral radius** of the Gauss--Seidel iteration matrix.
-- Analysed the **condition number** of the finite-difference matrices.
+- Derived the leading-order Airy asymptotics using the method of steepest descent.
+- Derived a higher-order correction to the asymptotic expansion.
+- Formulated the Airy boundary value problem and obtained its exact solution.
+- Implemented second- and fourth-order finite difference discretisations.
+- Used asymmetric fourth-order boundary stencils to maintain fourth-order accuracy.
+- Solved the resulting linear systems using Gauss--Seidel iteration.
+- Observed convergence rates of approximately **2.02** and **4.04**.
+- Investigated matrix conditioning and Gauss--Seidel spectral radius.
+- Compared exact, numerical, and asymptotic solutions.
 
 ---
 
-## 🛠️ Tools and Methods
+## Methods and Tools
 
-**Programming**
+**Mathematics**
+
+- Ordinary differential equations
+- Asymptotic analysis
+- Method of steepest descent
+- Boundary value problems
+- Finite difference methods
+- Iterative linear solvers
+- Matrix conditioning
+- Spectral analysis
+
+**Computing**
 
 - Python
 - NumPy
 - SciPy
 - Matplotlib
 
-**Mathematical methods**
-
-- Asymptotic analysis
-- Method of steepest descent
-- Taylor expansions
-- Finite difference methods
-- Iterative linear solvers
-- Gauss--Seidel iteration
-- Convergence analysis
-- Condition number and spectral-radius analysis
-
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
 .
 ├── code/
-│   ├── ...
 ├── plots/
-│   ├── finite_difference_convergence.png
-│   ├── condition_number.png
-│   └── spectral_radius.png
-├── Airy_Eq.pdf
+├── report.pdf
 └── README.md
