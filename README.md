@@ -83,12 +83,11 @@ $$
 
 The general solution is
 
-```math
-y(t)
-=
-C_1 Ai(x)
+$$
+y(t)=C_1 Ai(x)
 +
 C_2 Bi(x).
+$$
 
 
 
