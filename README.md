@@ -132,24 +132,15 @@ $$
 where
 
 $$
-A^{(2)}=\begin{pmatrix}
+A^{(2)}=\left(\begin{pmatrix}
 -2-h^2x_1 & 1 & 0 & \cdots & 0\\
 1 & -2-h^2x_2 & 1 & \ddots & \vdots\\
 0 & 1 & -2-h^2x_3 & \ddots & 0\\
 \vdots & \ddots & \ddots & \ddots & 1\\
 0 & \cdots & 0 & 1 & -2-h^2x_N
-\end{pmatrix}.
+\end{pmatrix}\right).
 $$
 
-$$
-A^{(2)}=\begin{pmatrix}
--2-h^2x_1 & 1 & 0 & \cdots & 0\\
-1 & -2-h^2x_2 & 1 & \ddots & \vdots\\
-0 & 1 & -2-h^2x_3 & \ddots & 0\\
-\vdots & \ddots & \ddots & \ddots & 1\\
-0 & \cdots & 0 & 1 & -2-h^2x_N
-\end{pmatrix}.
-$$
 
 After applying the boundary conditions,
 
