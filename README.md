@@ -91,10 +91,10 @@ $$
 
 
 Using the boundary conditions gives the exact solution
+
 $$
-y(x)= \frac{Bi(L)Ai(x)-Ai(L)Bi(x)}{Bi(L)Ai(0)-
-Ai(L)Bi(0)
-}.
+y(x)= \frac{Bi(L)Ai(x)-Ai(L)Bi(x)}
+{Bi(L)Ai(0)-Ai(L)Bi(0)}.
 $$
 
 
