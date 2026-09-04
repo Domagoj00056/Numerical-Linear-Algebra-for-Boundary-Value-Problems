@@ -81,15 +81,14 @@ y(0)=1,
 y(L)=0.
 $$
 
-The general solution is 
+The general solution is
 
-$$
-y(x)
+```math
+y(t)
 =
 C_1 Ai(x)
 +
 C_2 Bi(x).
-$$
 
 
 
