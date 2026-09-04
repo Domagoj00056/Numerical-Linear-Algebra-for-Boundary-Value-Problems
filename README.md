@@ -147,9 +147,7 @@ $$
 ### 1. `matrix` + `\left(\right)`
 
 $$
-A^{(2)}
-=
-\left(
+A^{(2)}=\left(
 \begin{matrix}
 -2-h^2x_1 & 1 & 0 & \cdots & 0\\
 1 & -2-h^2x_2 & 1 & \ddots & \vdots\\
@@ -163,8 +161,7 @@ $$
 ### 2. `matrix` + `\biggl(\biggr)`
 
 $$
-A^{(2)}
-=
+A^{(2)}=
 \biggl(
 \begin{matrix}
 -2-h^2x_1 & 1 & 0 & \cdots & 0\\
@@ -179,8 +176,7 @@ $$
 ### 3. `pmatrix`
 
 $$
-A^{(2)}
-=
+A^{(2)}=
 \begin{pmatrix}
 -2-h^2x_1 & 1 & 0 & \cdots & 0\\
 1 & -2-h^2x_2 & 1 & \ddots & \vdots\\
@@ -193,8 +189,7 @@ $$
 ### 4. `matrix` + `\Biggl(\Biggr)`
 
 $$
-A^{(2)}
-=
+A^{(2)}=
 \Biggl(
 \begin{matrix}
 -2-h^2x_1 & 1 & 0 & \cdots & 0\\
@@ -209,8 +204,7 @@ $$
 ### 5. `array` + `\left(\right)`
 
 $$
-A^{(2)}
-=
+A^{(2)}=
 \left(
 \begin{array}{ccccc}
 -2-h^2x_1 & 1 & 0 & \cdots & 0\\
