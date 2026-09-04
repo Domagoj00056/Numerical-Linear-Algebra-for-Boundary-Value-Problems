@@ -17,12 +17,12 @@ The project has two main components:
 
 ## 1. Asymptotic Analysis
 
-The Airy equation has two linearly independent solutions, commonly denoted by $\operatorname{Ai}(x)$ and $\operatorname{Bi}(x)$.
+The Airy equation has two linearly independent solutions, denoted by $Ai(x)$ and $Bi(x)$.
 
 For large positive $x$, their leading-order asymptotic behaviour is
 
 $$
-\operatorname{Ai}(x)
+Ai(x)
 \sim
 \frac{1}{2\sqrt{\pi}}
 x^{-1/4}
@@ -32,7 +32,7 @@ $$
 and
 
 $$
-\operatorname{Bi}(x)
+Bi(x)
 \sim
 \frac{1}{\sqrt{\pi}}
 x^{-1/4}
@@ -42,7 +42,7 @@ $$
 The asymptotic behaviour is derived using the **method of steepest descent**, starting from the contour integral representation
 
 $$
-\operatorname{Ai}(\lambda)
+Ai(\lambda)
 =
 \frac{1}{2\pi i}
 \int_{\gamma}
@@ -61,14 +61,14 @@ $$
 and renaming $s$ as $t$, this becomes
 
 $$
-\operatorname{Ai}(\lambda)
+Ai(\lambda)
 =
 \frac{\lambda^{1/2}}{2\pi i}
 \int_{\gamma}
 \exp\left(
 \lambda^{3/2}h(t)
 \right)
-\,dt,
+\,dt.
 $$
 
 where
@@ -99,10 +99,10 @@ The steepest descent contours are obtained by requiring the imaginary part of $h
 
 Expanding the contour locally around the relevant saddle point gives a higher-order approximation.
 
-The resulting expansion for $\operatorname{Ai}(x)$ is
+The resulting expansion for $Ai(x)$ is
 
 $$
-\operatorname{Ai}(x)
+Ai(x)
 \sim
 \frac{1}{2\sqrt{\pi}}
 x^{-1/4}
@@ -140,9 +140,9 @@ The general solution is
 $$
 y(x)
 =
-C_1\operatorname{Ai}(x)
+C_1 Ai(x)
 +
-C_2\operatorname{Bi}(x).
+C_2 Bi(x).
 $$
 
 Using the boundary conditions gives the exact solution
@@ -151,13 +151,13 @@ $$
 y(x)
 =
 \frac{
-\operatorname{Bi}(L)\operatorname{Ai}(x)
+Bi(L)Ai(x)
 -
-\operatorname{Ai}(L)\operatorname{Bi}(x)
+Ai(L)Bi(x)
 }{
-\operatorname{Bi}(L)\operatorname{Ai}(0)
+Bi(L)Ai(0)
 -
-\operatorname{Ai}(L)\operatorname{Bi}(0)
+Ai(L)Bi(0)
 }.
 $$
 
@@ -194,9 +194,7 @@ $$
 This produces a linear system
 
 $$
-A^{(2)}\mathbf{y}
-=
-\mathbf{b},
+A^{(2)}y=b,
 $$
 
 where
@@ -216,9 +214,7 @@ $$
 After applying the boundary conditions,
 
 $$
-\mathbf{b}
-=
-(-1,0,\ldots,0)^T.
+b=(-1,0,\ldots,0)^T.
 $$
 
 ---
@@ -258,17 +254,13 @@ $$
 The resulting system is
 
 $$
-A^{(4)}\mathbf{y}
-=
-\mathbf{b}.
+A^{(4)}y=b.
 $$
 
 After incorporating the boundary conditions,
 
 $$
-\mathbf{b}
-=
-(-11,0,\ldots,0)^T.
+b=(-11,0,\ldots,0)^T.
 $$
 
 For the interior rows, the diagonal entries contain the contribution
@@ -288,7 +280,7 @@ The resulting linear systems are solved using the **Gauss--Seidel iterative meth
 For a system
 
 $$
-A\mathbf{y}=\mathbf{b},
+Ay=b,
 $$
 
 write
@@ -297,23 +289,21 @@ $$
 A=D-L-U.
 $$
 
-The Gauss--Seidel iteration is then
+The Gauss--Seidel iteration is
 
 $$
-\mathbf{y}^{(k+1)}
+y^{(k+1)}
 =
 (D-L)^{-1}
-U\mathbf{y}^{(k)}
+Uy^{(k)}
 +
-(D-L)^{-1}\mathbf{b}.
+(D-L)^{-1}b.
 $$
 
 The corresponding iteration matrix is
 
 $$
-G
-=
-(D-L)^{-1}U.
+G=(D-L)^{-1}U.
 $$
 
 Convergence is determined by the spectral radius
@@ -322,7 +312,7 @@ $$
 \rho(G)
 =
 \max_i
-\left|\lambda_i(G)\right|.
+|\lambda_i(G)|.
 $$
 
 Gauss--Seidel converges when
@@ -367,8 +357,8 @@ The condition number is defined by
 $$
 \kappa(A)
 =
-\lVert A\rVert
-\lVert A^{-1}\rVert.
+\|A\|
+\|A^{-1}\|.
 $$
 
 The numerical results show how the conditioning of the discretised systems varies with $L$.
@@ -385,7 +375,7 @@ $$
 \rho(G)
 =
 \max_i
-\left|\lambda_i(G)\right|.
+|\lambda_i(G)|.
 $$
 
 For the tested range of $L$, the spectral radius decreases as $L$ increases, indicating faster Gauss--Seidel convergence in this numerical experiment.
