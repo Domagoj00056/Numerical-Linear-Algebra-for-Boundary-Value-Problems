@@ -149,6 +149,7 @@ b=(-1,0,\ldots,0)^T.
 $$
 
 The resulting linear system is solved using the **Gauss--Seidel iterative method**.
+
 ---
 ## 5. Fourth-Order Finite Difference Method
 
@@ -212,7 +213,8 @@ $$
 b=(-11,0,\ldots,0)^T.
 $$
 
-The resulting linear system is solved using the **Gauss--Seidel iterative method**.
+The resulting linear system is solved using the **Gauss--Seidel iterative method.**
+
 ---
 
 ## 6. Numerical Solution
