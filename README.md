@@ -81,7 +81,7 @@ y(0)=1,
 y(L)=0.
 $$
 
-The general solution is
+The general solution is 
 
 $$
 y(x)
@@ -90,6 +90,9 @@ C_1 Ai(x)
 +
 C_2 Bi(x).
 $$
+
+
+
 
 Using the boundary conditions gives the exact solution
 
