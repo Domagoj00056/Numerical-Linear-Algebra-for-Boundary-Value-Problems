@@ -149,58 +149,67 @@ b=(-1,0,\ldots,0)^T.
 $$
 
 ---
-
 ## 5. Fourth-Order Finite Difference Method
 
-A fourth-order approximation to the second derivative is
+To obtain fourth-order accuracy, three stencils are used: a centred stencil for interior points and one-sided stencils near each boundary. The one-sided stencils avoid introducing points outside the computational domain while retaining fourth-order accuracy.
+
+For interior points,
 
 $$
 y''(x_i)
 \approx
 \frac{
--y_{i-2}
-+16y_{i-1}
--30y_i
-+16y_{i+1}
--y_{i+2}
+-y_{i-2}+16y_{i-1}-30y_i+16y_{i+1}-y_{i+2}
 }{12h^2}.
 $$
 
-Near the boundaries, asymmetric fourth-order stencils are used to avoid introducing points outside the computational domain.
-
-For the first interior point,
+At the first interior point,
 
 $$
-y''(x_i)
+y''(x_1)
 \approx
 \frac{
-11y_{i-1}
--20y_i
-+6y_{i+1}
-+4y_{i+2}
--y_{i+3}
+11y_0-20y_1+6y_2+4y_3-y_4
+}{12h^2},
+$$
+
+while at the last interior point,
+
+$$
+y''(x_N)
+\approx
+\frac{
+11y_{N+1}-20y_N+6y_{N-1}+4y_{N-2}-y_{N-3}
 }{12h^2}.
 $$
 
-The resulting system is
+Substituting these stencils into $y''-xy=0$ gives
 
 $$
 A^{(4)}y=b.
 $$
 
-After incorporating the boundary conditions,
+The resulting matrix has the centred fourth-order stencil in the interior and the one-sided stencils in the first and last rows:
+
+$$
+A^{(4)}=\Bigg(
+\begin{matrix}
+-20-12h^2x_1 & 6 & 4 & -1 & 0 & \cdots & 0\\
+16 & -30-12h^2x_2 & 16 & -1 & 0 & \cdots & 0\\
+-1 & 16 & -30-12h^2x_3 & 16 & -1 & \ddots & \vdots\\
+0 & \ddots & \ddots & \ddots & \ddots & \ddots & 0\\
+\vdots & \ddots & -1 & 16 & -30-12h^2x_{N-1} & 16 & -1\\
+0 & \cdots & 0 & -1 & 16 & -30-12h^2x_N &  \\
+0 & \cdots & 0 & -1 & 4 & 6 & -20-12h^2x_N
+\end{matrix}
+\Bigg).
+$$
+
+After incorporating $y_0=1$ and $y_{N+1}=0$,
 
 $$
 b=(-11,0,\ldots,0)^T.
 $$
-
-For the interior rows, the diagonal entries contain the contribution
-
-$$
--30-12h^2x_i.
-$$
-
-The first and last rows use the asymmetric fourth-order boundary stencils.
 
 ---
 
