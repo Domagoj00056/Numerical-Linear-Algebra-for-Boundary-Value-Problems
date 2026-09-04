@@ -49,6 +49,16 @@ Ai(\lambda)
 \exp\left(
 \lambda t-\frac{t^3}{3}
 \right)
+\,dt
+
+$$
+Ai(\lambda)
+=
+\frac{1}{2\pi i}
+\int_{\gamma}
+\exp\left(
+\lambda t-\frac{t^3}{3}
+\right)
 \,dt.
 $$
 
